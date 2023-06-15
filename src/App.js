@@ -1,24 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { createContext, useState } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Navbar from './Components/Navbar';
+import SignIn from './Components/SignIn';
+import SignUp from './Components/SignUp';
+export const store = createContext()
 function App() {
+  const [token, setToken] = useState(null)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <store.Provider value={[token, setToken]}>
+      <BrowserRouter>
+      <Navbar/>
+      <Routes>
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/signin' element={<SignUp />} />
+      </Routes>
+      </BrowserRouter>
+    </store.Provider>
   );
 }
 
